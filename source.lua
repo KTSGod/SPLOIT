@@ -17,6 +17,15 @@ local Premium=false
 local Library={}
 local mouse = lp:GetMouse()
 
+local Credits="Made by KTS_God#8749"
+
+getgenv().OutputPrinting=false
+
+function PRINT(S) if getgenv().OutputPrinting then print(S) else return end end
+function WARN(S) if getgenv().OutputPrinting then warn(S) else return end end
+function ERROR(S) if getgenv().OutputPrinting then error(S) else return end end
+
+
 function Library:validate(defaults, options)
 	-- local options=options or {}
 	for i,v in pairs(defaults) do
@@ -36,7 +45,7 @@ end
 function Library:Init(options)
 	local options=options or {}
 	options = Library:validate({
-		Name="Sploit UI Library";
+		Name="SPLOIT_UI_Library";
 	},options)
 	local UI={
 		CurrentTab=nil;
@@ -318,22 +327,82 @@ function Library:Init(options)
 		UI["11"]["Size"] = UDim2.new(0.11949685215950012, 0, 0.05689277872443199, 0);
 		UI["11"]["Name"] = [[SettingsButton]];
 		UI["11"]["BackgroundTransparency"] = 1;
-		UI["11"]["Position"] = UDim2.new(0.43396222591400146, 0, 0.942843496799469, 0);
+		UI["11"]["Position"] = UDim2.new(0.43396222591400146, 0, 0.942843496799469, 0)
+	end
+	
+	do --// Settings
+		-- StarterGui..main.Settings
+		UI["75"] = Instance.new("Frame", UI["2"]);
+		UI["75"]["ZIndex"] = 20;
+		UI["75"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+		UI["75"]["BackgroundTransparency"] = 0.3499999940395355;
+		UI["75"]["Size"] = UDim2.new(0.9880239367485046, 0, 0.9789473414421082, 0);
+		UI["75"]["Position"] = UDim2.new(0.004491018131375313, 0, 0.010526316240429878, 0);
+		UI["75"]["Visible"] = false;
+		UI["75"]["Name"] = [[Settings]];
+
+		-- StarterGui..main.Settings.Credits
+		UI["76"] = Instance.new("TextLabel", UI["75"]);
+		UI["76"]["TextWrapped"] = true;
+		UI["76"]["ZIndex"] = 20;
+		UI["76"]["TextScaled"] = true;
+		UI["76"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+		UI["76"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+		UI["76"]["TextSize"] = 14;
+		UI["76"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+		UI["76"]["Size"] = UDim2.new(0.18997369706630707, 0, 0.05376344174146652, 0);
+		UI["76"]["Text"] = Credits;
+		UI["76"]["Name"] = [[Credits]];
+		UI["76"]["Visible"] = false;
+		UI["76"]["BackgroundTransparency"] = 0.699999988079071;
+		UI["76"]["Position"] = UDim2.new(0.013636363670229912, 0, 0.9462365508079529, 0);
+
+		-- StarterGui..main.Settings.Credits.UIStroke
+		UI["77"] = Instance.new("UIStroke", UI["76"]);
+		UI["77"]["Color"] = Color3.fromRGB(255, 255, 255);
+		UI["77"]["Thickness"] = 0.30000001192092896;
+		UI["77"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+		-- StarterGui..main.Settings.Credits.UICorner
+		UI["78"] = Instance.new("UICorner", UI["76"]);
+
+
+		-- StarterGui..main.Settings.UICorner
+		UI["79"] = Instance.new("UICorner", UI["75"]);
+
+
+		-- StarterGui..main.Settings.UIStroke
+		UI["7a"] = Instance.new("UIStroke", UI["75"]);
+		UI["7a"]["Color"] = Color3.fromRGB(255, 255, 255);
+		UI["7a"]["Thickness"] = 0.30000001192092896;
+		UI["7a"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+		-- StarterGui..main.Settings.UiLibraryName
+		UI["7b"] = Instance.new("TextLabel", UI["75"]);
+		UI["7b"]["TextWrapped"] = true;
+		UI["7b"]["ZIndex"] = 20;
+		UI["7b"]["TextScaled"] = true;
+		UI["7b"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+		UI["7b"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+		UI["7b"]["TextSize"] = 14;
+		UI["7b"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+		UI["7b"]["Size"] = UDim2.new(0.18664082884788513, 0, 0.05376344174146652, 0);
+		UI["7b"]["Text"] = [[Sploit]];
+		UI["7b"]["Name"] = [[UiLibraryName]];
+		UI["7b"]["Visible"] = false;
+		UI["7b"]["BackgroundTransparency"] = 0.699999988079071;
+		UI["7b"]["Position"] = UDim2.new(0.2075757533311844, 0, 0.9462365508079529, 0);
+
+		-- StarterGui..main.Settings.UiLibraryName.UIStroke
+		UI["7c"] = Instance.new("UIStroke", UI["7b"]);
+		UI["7c"]["Color"] = Color3.fromRGB(255, 255, 255);
+		UI["7c"]["Thickness"] = 0.30000001192092896;
+		UI["7c"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+		-- StarterGui..main.Settings.UiLibraryName.UICorner
+		UI["7d"] = Instance.new("UICorner", UI["7b"]);
 
 	end
-
-
-	do --// Open/Close UI
-		uis.InputBegan:Connect(function(input, gpe)
-			if gpe then return end
-
-			if input.KeyCode == Enum.KeyCode.RightAlt then
-				UI["1"]["Enabled"] = not UI["1"]["Enabled"]
-			end
-		end)
-
-		--// Notify the player.
-	end	
 
 	function UI:CreateTab(options)
 
@@ -479,7 +548,6 @@ function Library:Init(options)
 		end
 
 		do --// Interactables / Elements Handler
-
 			function Tab:CreateNotification(options)
 				local options=options or {}
 				options = Library:validate({
@@ -694,7 +762,7 @@ function Library:Init(options)
 			function Tab:CreateDropdown(options)
 				options = Library:validate({
 					Name = "Preview Dropdown",
-					Callback = function(v) print(v) end,
+					Callback = function(v) PRINT(v) end,
 					items = {}
 				}, options or {})
 
@@ -736,7 +804,7 @@ function Library:Init(options)
 					Dropdown["2a"]["AnchorPoint"] = Vector2.new(0,0);
 					Dropdown["2a"]["LayoutOrder"] = 2;
 					Dropdown["2a"]["Size"] = UDim2.new(0, 259,0, 43);
-					Dropdown["2a"]["Text"] = options.Title;
+					Dropdown["2a"]["Text"] = options.Name;
 					Dropdown["2a"]["Name"] = [[Dropdown]];
 					Dropdown["2a"]["BackgroundTransparency"] = 1;
 					Dropdown["2a"]["Position"] = UDim2.new(0.012, 0,-0.017, 0);
@@ -838,7 +906,7 @@ function Library:Init(options)
 						Dropdown.Items[id].instance["35"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 						Dropdown.Items[id].instance["35"]["Size"] = UDim2.new(0, 200, 0, 28);
 						Dropdown.Items[id].instance["35"]["Text"] = id;
-						Dropdown.Items[id].instance["35"]["Name"] = [[InactiveOption]];
+						Dropdown.Items[id].instance["35"]["Name"] = id;
 						Dropdown.Items[id].instance["35"]["BackgroundTransparency"] = 0.699999988079071;
 						Dropdown.Items[id].instance["35"]["Position"] = UDim2.new(0.14664310216903687, 0, 0.13274335861206055, 0);
 
@@ -876,7 +944,7 @@ function Library:Init(options)
 								Item.MouseDown = true
 								Library:tween(Dropdown.Items[id].instance["36"], {Color = Color3.fromRGB(0,255,0)})
 								Library:tween(Dropdown.Items[id].instance["35"], {BackgroundColor3 = Color3.fromRGB(41, 41, 41)})
-								options.Callback(value)
+								options.Callback(id)
 								Dropdown:Toggle()
 							end
 						end)
@@ -919,7 +987,7 @@ function Library:Init(options)
 
 					function Dropdown:Toggle()
 						Dropdown.Open = not Dropdown.Open
-						print(Dropdown.Open)
+						PRINT(Dropdown.Open)
 						if not Dropdown.Open then
 							Library:tween(Dropdown["29"], {Size = UDim2.new(0, 299,0, 47)}, function()
 								Dropdown["31"]["Visible"] = false;
@@ -1156,7 +1224,7 @@ function Library:Init(options)
 					Min=0;
 					Max=100;
 					Default=50;
-					Callback = function(v) print(v) end
+					Callback = function(v) PRINT(v) end
 				},options)
 
 				local Slider={
@@ -1190,8 +1258,8 @@ function Library:Init(options)
 					Slider["1e"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
 					Slider["1e"]["LayoutOrder"] = 2;
 					Slider["1e"]["Size"] = UDim2.new(0, 77, 0, 33);
-					Slider["1e"]["Text"] = options.Text;
-					Slider["1e"]["Name"] = options.Text;
+					Slider["1e"]["Text"] = options.Name;
+					Slider["1e"]["Name"] = options.Name;
 					Slider["1e"]["BackgroundTransparency"] = 1;
 					Slider["1e"]["Position"] = UDim2.new(0.16220736503601074, 0, 0.2836567759513855, 0);
 
@@ -1266,7 +1334,7 @@ function Library:Init(options)
 							local value = math.floor(((options.Max - options.Min) * percentage) + options.Min)
 
 							Slider["28"]["Text"]=tostring(value)
-							Slider["25"]["Size"] = UDim2.fromScale(percentage, 1.1)
+							Slider["25"]["Size"] = UDim2.fromScale(percentage, 1.2)
 						else
 							Slider["28"]["Text"]=tostring(v)
 							Slider["25"]["Size"] = UDim2.fromScale(((v - options.Min) / (options.Max - options.Min)), 1)
@@ -1274,12 +1342,9 @@ function Library:Init(options)
 
 						options.Callback(Slider.GetValue())
 					end
-					function Slider:GetValue()
-						return tonumber(Slider["28"]["Text"])
-					end
-					function Slider:SetName(text)
-						Slider["1e"]["Text"]=text
-					end
+					function Slider:GetValue() return tonumber(Slider["28"]["Text"]) end
+					function Slider:SetName(text) Slider["1e"]["Text"]=text end
+					function Slider:SetCallback(fn) options.Callback=fn end
 				end
 
 				do --// Logic
@@ -1509,14 +1574,110 @@ function Library:Init(options)
 
 				return Error
 			end
+			function Tab:CreateLabel(options)
+				local options=options or {}
+				options = Library:validate({
+					Message="Preview Label";
+				},options)
+
+				local Label={}
+
+				do --// Render
+					-- StarterGui..main.Window.ElementsContainer.Error
+					Label["300"] = Instance.new("Frame", Tab["18"]);
+					Label["300"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+					Label["300"]["BackgroundTransparency"] = 0.699999988079071;
+					Label["300"]["Size"] = UDim2.new(0, 299, 0, 40);
+					Label["300"]["ClipsDescendants"] = true;
+					Label["300"]["Position"] = UDim2.new(0.15632183849811554, 0, 0.36082473397254944, 0);
+					Label["300"]["Name"] = [[Error]];
+
+					-- StarterGui..main.Window.ElementsContainer.Error.UICorner
+					Label["301"] = Instance.new("UICorner", Label["300"]);
+
+					-- StarterGui..main.Window.ElementsContainer.Error.UIStroke
+					Label["302"] = Instance.new("UIStroke", Label["300"]);
+					Label["302"]["Color"] = Color3.fromRGB(255, 255, 255);
+					Label["302"]["Thickness"] = 0.30000001192092896;
+					Label["302"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+					-- StarterGui..main.Window.ElementsContainer.Error.Error
+					Label["303"] = Instance.new("TextLabel", Label["300"]);
+					Label["303"]["TextWrapped"] = true;
+					Label["303"]["TextStrokeTransparency"] = 0.23999999463558197;
+					Label["303"]["RichText"] = true;
+					Label["303"]["TextScaled"] = true;
+					Label["303"]["BackgroundColor3"] = Color3.fromRGB(255, 0, 0);
+					Label["303"]["TextXAlignment"] = Enum.TextXAlignment.Left;
+					Label["303"]["FontFace"] = Font.new([[rbxasset://fonts/families/TitilliumWeb.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+					Label["303"]["TextSize"] = 14;
+					Label["303"]["TextColor3"] = Color3.fromRGB(0, 69, 255);
+					Label["303"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+					Label["303"]["LayoutOrder"] = 1;
+					Label["303"]["Size"] = UDim2.new(0, 300, 0, 26);
+					Label["303"]["Text"] = options.Message;
+					Label["303"]["Name"] = options.Message;
+					Label["303"]["BackgroundTransparency"] = 1;
+					Label["303"]["Position"] = UDim2.new(0.43979933857917786, 0, 0.4889175295829773, 0);
+
+					-- StarterGui..main.Window.ElementsContainer.Error.Error.UITextSizeConstraint
+					Label["304"] = Instance.new("UITextSizeConstraint", Label["303"]);
+					Label["304"]["MaxTextSize"] = 50;
+
+					-- StarterGui..main.Window.ElementsContainer.Error.Error.UIAspectRatioConstraint
+					Label["305"] = Instance.new("UIAspectRatioConstraint", Label["303"]);
+					Label["305"]["AspectRatio"] = 6;
+					Label["305"]["AspectType"] = Enum.AspectType.ScaleWithParentSize;
+
+					-- StarterGui..main.Window.ElementsContainer.Error.Error.Icon
+					Label["306"] = Instance.new("ImageLabel", Label["303"]);
+					Label["306"]["ScaleType"] = Enum.ScaleType.Fit;
+					Label["306"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+					Label["306"]["ImageColor3"] = Color3.fromRGB(0, 69, 255);
+					Label["306"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+					Label["306"]["Image"] = [[rbxasset://textures/ui/LuaChat/icons/ic-info.png]];
+					Label["306"]["Size"] = UDim2.new(0.10999999940395355, 0, 0.736264169216156, 0);
+					Label["306"]["Name"] = [[Icon]];
+					Label["306"]["BackgroundTransparency"] = 1;
+					Label["306"]["Position"] = UDim2.new(1.0916666984558105, 0, 0.5, 0);
+
+					-- StarterGui..main.Window.ElementsContainer.Error.Error.Icon.UIAspectRatioConstraint
+					Label["307"] = Instance.new("UIAspectRatioConstraint", Label["306"]);
+					Label["307"]["AspectRatio"] = 0.8964173793792725;
+					Label["307"]["AspectType"] = Enum.AspectType.ScaleWithParentSize;
+				end
+
+				do --// Methods
+					function Label:SetMessage(Message)
+						options.Message=Message
+						Label["303"].Text=Message --// Error["4a"].Text=options.Message
+					end
+				end
+
+
+				return Label
+			end
+
 		end
+		
 		return Tab
 	end
+	
+	do --// Open/Close UI
+		uis.InputBegan:Connect(function(input, gpe)
+			if gpe then return end
 
+			if input.KeyCode == Enum.KeyCode.RightAlt then
+				UI["1"]["Enabled"] = not UI["1"]["Enabled"]
+			end
+		end)
+
+		--// Notify the player.
+	end	
 
 	return UI
 end
-
+--[[
 local lib = Library:Init({
 	Name="Sploit Hub"
 })
@@ -1527,7 +1688,7 @@ local tab=lib:CreateTab({Name="asfqasdf"})
 
 local Button = tab:CreateButton({Name="Button";
 	Callback=function()
-		print("aa")
+		PRINT("aa")
 	end,
 })
 local i=0
@@ -1558,24 +1719,18 @@ local Toggle = tab:CreateToggle({
 			lp.Character:FindFirstChildOfClass("Humanoid").WalkSpeed=0
 		elseif v then --// On
 			lp.Character:FindFirstChildOfClass("Humanoid").WalkSpeed=99999
-
 		end
-		print(v)
+		PRINT(v)
 	end,
 })
 
 --// Dropdown
-
 local Dropdown = tab:CreateDropdown({
 	Name="Dropdown";
-	Items={"a","b","c","d","e","f","g"};
-	Callback = function() print("Clicked") end;
+	items={"hi"};
+	Callback = function(currentoption) PRINT(currentoption) end;
 })
-
-Dropdown:Add("TestOption1",68)
-Dropdown:Add("TestOption2",69)
-Dropdown:Add("TestOption3",3)
---[[ Labels ]]
+--/// Labels \\\--
 
 --// Warning
 
@@ -1586,24 +1741,21 @@ local Warning = tab:CreateWarning({Message="Warning",})
 
 local Error = tab:CreateError({Message="Error",})
 
+--// Label
+
+local Label = tab:CreateLabel({Message="Label",})
+
 --// Loop_Test
 
 while true do
 	wait(1)
 	Error:SetMessage("Error")
 	Warning:SetMessage("Warning")
+	Label:SetMessage("Label")
 	wait(5)
 	Error:SetMessage("Error [SET_TEXT]")
 	Warning:SetMessage("Warning [SET_TEXT]")
+	Label:SetMessage("Label [SET_TEXT]")
 	wait(1)
 end
-
---// Notifications
-
-local notification = tab:CreateNotification{
-	Title="ah";
-	Description="ah";
-	Duration=6;
-}
-
-print(notification);
+]]
