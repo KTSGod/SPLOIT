@@ -693,7 +693,7 @@ function Library:Init(options)
 			end
 			function Tab:CreateDropdown(options)
 				options = Library:validate({
-					Title = "Preview Slider",
+					Name = "Preview Dropdown",
 					Callback = function(v) print(v) end,
 					items = {}
 				}, options or {})
@@ -1152,7 +1152,7 @@ function Library:Init(options)
 			end
 			function Tab:CreateSlider(options)
 				options = Library:validate({
-					Text="Preview Slider";
+					Name="Preview Slider";
 					Min=0;
 					Max=100;
 					Default=50;
@@ -1516,7 +1516,7 @@ function Library:Init(options)
 
 	return UI
 end
---[[
+
 local lib = Library:Init({
 	Name="Sploit Hub"
 })
@@ -1539,7 +1539,7 @@ end)
 --// Slider
 
 local Slider = tab:CreateSlider({
-	Text="Slider";
+	Name="Slider";
 	Min=0;
 	Max=50;
 	Default=25;
@@ -1575,7 +1575,7 @@ local Dropdown = tab:CreateDropdown({
 Dropdown:Add("TestOption1",68)
 Dropdown:Add("TestOption2",69)
 Dropdown:Add("TestOption3",3)
--- Labels
+--[[ Labels ]]
 
 --// Warning
 
@@ -1607,4 +1607,3 @@ local notification = tab:CreateNotification{
 }
 
 print(notification);
-]]
