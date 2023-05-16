@@ -9,20 +9,39 @@ local SPLOIT_UI = loadstring(game:HttpGet(('https://raw.githubusercontent.com/KT
 
 ```lua
 local SPLOIT_Window = Library:Init {
-	name = "Window Title"
+	Name = "Window Title";
 }
 ```
 
 ## Create a Tab
 
 ```lua
-local SPLOIT_Tab = SPLOIT_Window:Tab()
+local SPLOIT_Tab = SPLOIT_Window:CreateTab()
 ```
 
-## Create a button
+## Create a Button
 
 ```lua
-  local btn2 = tab:Button({
-  callback = function() tog:Toggle(false) 
-  end})
+ local SPLOIT_Button = SPLOIT_Tab:CreateButton({
+	Title="Button";
+	Callback=function()
+	print("aa")
+	end,
+})
 ```
+### :SetText()
+
+```lua
+SPLOIT_Button:SetText("Text")
+```
+### :SetCallback()
+
+```lua
+local i = 0
+SPLOIT_Button:SetCallback(function()
+	Button:SetText("I have been clicked " .. i .. " times")
+	i+=1
+end)
+```
+
+
