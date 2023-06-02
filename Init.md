@@ -68,7 +68,7 @@ SPLOIT_Toggle:SetText("Text")
 ```lua
 local i=0
 SPLOIT_Toggle:SetCallback(function()
-	print(":SetCallback(")
+	print(":SetCallback()")
 end)
 ```
 
